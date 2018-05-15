@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["debris <marek.kotewicz@gmail.com>"]
 description = "Standard test map for profiling tries"
 repository = "https://github.com/paritytech/trie-standardmap"
+license = "GPL-3.0"
 
 [dependencies]
 ethcore-bytes = "0.1.1"
