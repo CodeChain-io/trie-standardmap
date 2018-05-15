@@ -3,9 +3,10 @@ name = "trie-standardmap"
 version = "0.1.0"
 authors = ["debris <marek.kotewicz@gmail.com>"]
 description = "Standard test map for profiling tries"
+repository = "https://github.com/paritytech/trie-standardmap"
 
 [dependencies]
-ethcore-bytes = { path = "../bytes" }
+ethcore-bytes = "0.1.1"
 ethereum-types = "0.3"
-keccak-hash = { path = "../hash" }
-rlp = { path = "../rlp" }
+keccak-hash = "0.1.1"
+rlp = "0.2.2"
