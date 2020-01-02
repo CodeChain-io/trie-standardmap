@@ -16,14 +16,9 @@
 
 //! Key-value datastore with a modified Merkle tree.
 
-extern crate ethcore_bytes as bytes;
-extern crate ethereum_types;
-extern crate keccak_hash;
-extern crate rlp;
-
-use bytes::Bytes;
-use ethereum_types::H256;
-use keccak_hash::keccak;
+use codechain_crypto::blake256;
+use primitives::Bytes;
+use primitives::H256;
 use rlp::encode;
 
 /// Alphabet to use when creating words for insertion into tries.
@@ -67,14 +62,14 @@ impl StandardMap {
     /// `seed` is mutated pseudoramdonly and used.
     fn random_bytes(min_count: usize, journal_count: usize, seed: &mut H256) -> Vec<u8> {
         assert!(min_count + journal_count <= 32);
-        *seed = keccak(&seed);
+        *seed = blake256(&seed);
         let r = min_count + (seed[31] as usize % (journal_count + 1));
         seed[0..r].to_vec()
     }
 
     /// Get a random value. Equal chance of being 1 byte as of 32. `seed` is mutated pseudoramdonly and used.
     fn random_value(seed: &mut H256) -> Bytes {
-        *seed = keccak(&seed);
+        *seed = blake256(&seed);
         match seed[0] % 2 {
             1 => vec![seed[31]; 1],
             _ => seed.to_vec(),
@@ -85,7 +80,7 @@ impl StandardMap {
     /// Each byte is an item from `alphabet`. `seed` is mutated pseudoramdonly and used.
     fn random_word(alphabet: &[u8], min_count: usize, journal_count: usize, seed: &mut H256) -> Vec<u8> {
         assert!(min_count + journal_count <= 32);
-        *seed = keccak(&seed);
+        *seed = blake256(&seed);
         let r = min_count + (seed[31] as usize % (journal_count + 1));
         let mut ret: Vec<u8> = Vec::with_capacity(r);
         for i in 0..r {
@@ -96,7 +91,7 @@ impl StandardMap {
 
     /// Create the standard map (set of keys and values) for the object's fields.
     pub fn make(&self) -> Vec<(Bytes, Bytes)> {
-        self.make_with(&mut H256::new())
+        self.make_with(&mut H256::zero())
     }
 
     /// Create the standard map (set of keys and values) for the object's fields, using the given seed.
@@ -115,7 +110,7 @@ impl StandardMap {
             let v = match self.value_mode {
                 ValueMode::Mirror => k.clone(),
                 ValueMode::Random => Self::random_value(seed),
-                ValueMode::Index => encode(&index).into_vec(),
+                ValueMode::Index => encode(&index),
             };
             d.push((k, v))
         }
