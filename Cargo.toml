@@ -1,6 +1,6 @@
 [package]
 name = "trie-standardmap"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["CodeChain Team <hi@codechain.io>", "debris <marek.kotewicz@gmail.com>"]
 description = "Standard test map for profiling merkle tries"
 repository = "https://github.com/CodeChain/trie-standardmap"
@@ -8,6 +8,6 @@ license = "GPL-3.0"
 edition = "2018"
 
 [dependencies]
-codechain-crypto = { git = "https://github.com/CodeChain-io/rust-codechain-crypto.git", version = "0.1" }
+codechain-crypto = { git = "https://github.com/CodeChain-io/rust-codechain-crypto.git", version = "0.2" }
 primitives = { git = "https://github.com/CodeChain-io/rust-codechain-primitives.git", version = "0.4" }
 rlp = { git = "https://github.com/CodeChain-io/rlp.git", version = "0.4" }
