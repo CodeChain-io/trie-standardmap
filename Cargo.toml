@@ -1,6 +1,6 @@
 [package]
 name = "trie-standardmap"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["CodeChain Team <hi@codechain.io>", "debris <marek.kotewicz@gmail.com>"]
 description = "Standard test map for profiling merkle tries"
 repository = "https://github.com/CodeChain/trie-standardmap"
