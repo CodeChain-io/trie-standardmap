@@ -72,7 +72,7 @@ impl StandardMap {
         *seed = blake256(&seed);
         match seed[0] % 2 {
             1 => vec![seed[31]; 1],
-            _ => seed.to_vec(),
+            _ => seed.as_bytes().to_vec(),
         }
     }
 
